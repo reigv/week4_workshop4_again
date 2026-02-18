@@ -39,6 +39,8 @@
 #ifndef CARD_H
 #define CARD_H
 
+// #include <string>
+
 class Card {
 
     protected:
@@ -47,6 +49,35 @@ class Card {
 
     public:
         Card(std::string name, int health): name(name), health(health) {}
+
+        virtual ~Card() {
+            std::cout << name << " is destroyed." << std::endl;
+        }
+
+        std::string getName() const {
+            return name;
+        }
+
+        int getHealth() const {
+            return health;
+        }
+
+        bool isAlive() const {
+            return health > 0;
+        }
+
+        virtual void attack(Card &target) = 0; // why =0 --> makes it a pure virtual function, meaning that this class cannot be instantiated and must be overridden by derived classes
+        // so with =0  means this func will be in the derived classes and not in the base class
+        // and it need to be overridden because its pure func
+
+        virtual void takeDamage(int damage) {
+            health -= danage;
+            if (health <0) {
+                health = 0;     
+            }
+            std::cout << name << " takes " << damage << " damage, health is now " << health << "." << std::endl;
+        }
+
         
 }
 
